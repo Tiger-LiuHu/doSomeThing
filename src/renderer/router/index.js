@@ -22,7 +22,7 @@ export default new Router({
                     children: [{
                         path: '/',
                         component: () =>
-                            import ('@/components/LandingPage')
+                            import ('@/components/Mesagepage/MesagepageMain')
                     }],
                 },
                 {
