@@ -1,16 +1,20 @@
 <template>
   <div class="MesagepageFrameContaint">
-      <MesagepageFrame>
+      <MesagepageFrame >
              <PersonandMessage slot="PersonandMessage"></PersonandMessage>
-      </MesagepageFrame>
+             <MessageSend slot="SendMessage"></MessageSend>
+      </MesagepageFrame >
   </div>
 </template>
 <script>
 import MesagepageFrame from '@/components/Mesagepage/MesagepageFrame.vue'
 import PersonandMessage from '@/components/Mesagepage/PersonandMessage.vue'
+import MessageSend from '@/components/Mesagepage/MessageSend.vue'
+
+
 
 export default {
-    components:{MesagepageFrame,PersonandMessage}
+    components:{MesagepageFrame ,PersonandMessage,MessageSend}
 }
 </script>
 

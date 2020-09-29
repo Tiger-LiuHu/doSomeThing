@@ -28,4 +28,37 @@ export default {
     width: 100%;
     height: 100%
 }
+.InputEnterContent{
+        .ivu-input{
+             border: none !important;
+            resize: none !important;
+            text-align: left !important;
+            overflow-x: hidden !important;
+            overflow-y: hidden !important;
+        }
+         .ivu-input:focus{
+              border: none !important;
+            resize: none !important;
+            text-align: left !important;
+            overflow-x: hidden !important;
+            overflow-y: hidden !important;
+            box-shadow:0 0 0 0;
+         }
+}
+::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+}
+::-webkit-scrollbar-track {
+    background-color: #bee1eb;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #00aff0;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9c3;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #00aff0;
+}
 </style>

@@ -24,9 +24,9 @@ export default {
     background-color: bisque;
     width: 20%;
     min-width:250px;
+    border-right: 1px solid #e3e3e3;
 }
 .SendMessage{
-    background-color: green;
     width:  100%;
 }
 </style>
