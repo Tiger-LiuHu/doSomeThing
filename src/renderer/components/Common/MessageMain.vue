@@ -21,6 +21,7 @@
  <script>
  import mainHead from '@/components/Common/MainHeader.vue'
 import mainFooter from '@/components/Common/MainFooter.vue'
+import {createSocket} from"../../Commom/OwnSocketio.js"
 import { mapGetters } from "vuex";
 export default {
   name: "mainFrame",
@@ -33,6 +34,9 @@ export default {
       "transitionGroup",
     ]),
   },
+  created(){
+      createSocket()
+  }
 };
 </script>
  

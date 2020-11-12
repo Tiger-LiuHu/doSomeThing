@@ -11,7 +11,12 @@ export default new Router({
         //   component: require('@/components/LandingPage').default
         // },
         {
-            path: '/',
+            path: '/LandingPage',
+            component: () =>
+                import ('@/components/LandingPage')
+        },
+        {
+            path: '/mainWindow',
             name: 'mainWindow',
             component: () =>
                 import ('@/components/Common/MainWindow.vue'),
@@ -20,10 +25,16 @@ export default new Router({
                     component: () =>
                         import ('@/components/Common/MessageMain'),
                     children: [{
-                        path: '/',
-                        component: () =>
-                            import ('@/components/Mesagepage/MesagepageMain')
-                    }],
+                            path: '/',
+                            component: () =>
+                                import ('@/components/Mesagepage/MesagepageMain')
+                        },
+                        {
+                            path: 'MesagepageMain',
+                            component: () =>
+                                import ('@/components/Mesagepage/MesagepageMain')
+                        }
+                    ],
                 },
                 {
                     path: '/PendingMain',
@@ -54,7 +65,18 @@ export default new Router({
                 //   }
             ]
         },
-
+        {
+            path: '/',
+            name: 'Login',
+            component: () =>
+                import ('@/components/Login/Login.vue'),
+        },
+        {
+            path: '/Register',
+            name: 'Register',
+            component: () =>
+                import ('@/components/Login/Register.vue'),
+        },
         {
             path: '*',
             redirect: '/'

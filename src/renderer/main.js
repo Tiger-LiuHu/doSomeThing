@@ -13,17 +13,19 @@ import Win from 'electron-vue-windows'
 import './assets/transform/transform.css'
 //导入图标
 import "./assets/icon/iconfont.js"
-Vue.use(ViewUI);
 import db from '../renderer/Commom/datastore.js'
-
 Vue.prototype.$db = db;
+
+
+
+
 
 Win.init(router, {
     freeWindowNum: 2,
-    port: 9088
+    port: 9080
 })
 Vue.prototype.$Win = Win
-
+Vue.use(ViewUI);
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios

@@ -1,7 +1,7 @@
 <template>
   <div class="sider">
       <div  class="meuns">
-          <div class="meusItems avatar"> <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" /></div>
+          <div class="meusItems avatar" @click="GoinSystem"> <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" /></div>
            <div class="meusItems meusItem" :class="ActiveMenus=='MessageMain'?'meusItemactive':''" @click="GOPage('MessageMain')">
               <p><svg class="ownicon" aria-hidden="true">
                 <use xlink:href="#icon-message" ></use>
@@ -27,6 +27,30 @@ export default {
       }
   },
   methods: {
+      GoinSystem(){
+            let fatherBounds = this.$Win.win.getBounds()
+      // 判断右边是否过界
+    //   let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x - 300
+    //   let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x-1000 
+       let x=(fatherBounds.x+fatherBounds.width/2-150)<0?0:(fatherBounds.x+fatherBounds.width/2-150);
+      let y = (fatherBounds.y+fatherBounds.height/2-250)<0?0:(fatherBounds.y+fatherBounds.height/2-250);
+
+      let win = this.$Win.createWin({
+        width: 300,
+        height: 500,
+        x: x,
+        y: y,
+        windowConfig: {
+          router: '/Login',
+          vibrancy: false,
+          name: 'Login',
+          animation: 'fromBottom'
+        }
+      })
+      win.show()
+        remote.getCurrentWindow().close();
+
+      },
     gotoHome () {
     //   this.$store.dispatch('changeTransition', 'flip')
       this.$router.push('/login')

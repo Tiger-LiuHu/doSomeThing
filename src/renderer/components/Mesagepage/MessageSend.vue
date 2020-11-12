@@ -26,10 +26,10 @@
         </div>
         <div class="InputEnter">
             <div class="InputEnterContent">
-                <Input class="input3" style="border: none;resize: none" v-model="Message" type="textarea" :rows="9" placeholder="Enter something..." />
+                <Input class="input3" style="border: none;resize: none" v-model="Message" @on-change="MessageChange" type="textarea" :rows="9" placeholder="Enter something..." />
             </div>
             <div class="InputEnterbutton">
-             <span style="color:#e3e3e3;margin-right:30px">Enter 发送,Ctrl+Enter 换行</span><Button disabled shape="circle">发送</Button>
+             <span style="color:#e3e3e3;margin-right:30px">Enter 发送,Ctrl+Enter 换行</span><Button :disabled="canSend" shape="circle" @click="sendWSPush">发送</Button>
             </div>
         </div>
       </div>
@@ -56,10 +56,33 @@
   </div>
 </template>
 <script>
+import { sendWSPush } from "../../Commom/OwnSocketio.js";
 export default {
     data(){
         return {
-            Message:""
+            Message:"",
+            canSend:true,
+        }
+    },
+    mounted(){
+        window.addEventListener('onmessageWS', this.getsocketData)
+    },
+    methods:{
+        getsocketData(e){
+            if(e.detail.data!="ping"){
+                console.log(e)
+            }
+        },
+        MessageChange(){
+            if(this.Message.trim().length>0){
+                    this.canSend=false;
+            }else{
+                    this.canSend=true;
+            }
+        },
+        sendWSPush(){
+            sendWSPush({type:"Msg",data:this.Message});
+            this.Message="";
         }
     }
 };

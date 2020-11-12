@@ -10,12 +10,6 @@
     <div class="Messageabbreviate">
         <Mesageabbreviate></Mesageabbreviate>
         <Mesageabbreviate></Mesageabbreviate>
-        <Mesageabbreviate></Mesageabbreviate>
-        <Mesageabbreviate></Mesageabbreviate>
-        <Mesageabbreviate></Mesageabbreviate>
-        <Mesageabbreviate></Mesageabbreviate>
-        <Mesageabbreviate></Mesageabbreviate>
-        <Mesageabbreviate></Mesageabbreviate>
     </div>
   </div>
 </template>
