@@ -23,11 +23,11 @@
                 </div>
             </div>
             <div style="display: flex;height:200px;align-items: center;justify-content: space-around;flex-direction: column;padding: 10px">
-              <Input  placeholder="请输入用户名"/>
-              <Input  placeholder="请输入密码！"/>
+              <Input  placeholder="请输入用户名" v-model="name"/>
+              <Input  placeholder="请输入密码！" v-model="pwd" type="password" />
               <div style="width: 100%;display: flex">
                 <Button style="width: 50%" @click="GoLogin">登录</Button>
-                <Button style="width: 50%" @click="Register">注册</Button>
+                <Button style="width: 50%" @click="Register" >注册</Button>
               </div>
             </div>
             <div>
@@ -52,33 +52,73 @@
 <script>
 import { remote } from 'electron';
 import MainHeader from '@/components/Common/MainHeader.vue'
+import {signByUsername,Register} from"@/api/user.js"
+
 export default {
     components:{
         MainHeader
     },
+    data(){
+       return {
+            name:"",
+            pwd:""
+       }
+    },
     methods:{
         GoLogin(){
-           let fatherBounds = this.$Win.win.getBounds()
-      // 判断右边是否过界
-    //   let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x -300
-    //   let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x - 1000
-      let x=(fatherBounds.x+fatherBounds.width/2-680)<0?0:(fatherBounds.x+fatherBounds.width/2-680);
-      let y = (fatherBounds.y+fatherBounds.height/2-480)<0?0:(fatherBounds.y+fatherBounds.height/2-480);
+            let _this=this;
+            signByUsername(_this.name,_this.pwd).then(res=>{
+                    console.log(res.data.message);
+                    if(res.data.Success){
+                     _this.$Message.success(res.data.message);
+                        let fatherBounds = _this.$Win.win.getBounds()
+                    // 判断右边是否过界
+                    //   let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x -300
+                    //   let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x - 1000
+                    let x=(fatherBounds.x+fatherBounds.width/2-680)<0?0:(fatherBounds.x+fatherBounds.width/2-680);
+                    let y = (fatherBounds.y+fatherBounds.height/2-480)<0?0:(fatherBounds.y+fatherBounds.height/2-480);
+                    let win = _this.$Win.createWin({
+                        width: 1360,
+                        height: 960,
+                        x: x,
+                        y: y,
+                        windowConfig: {
+                        router: '/mainWindow/MessageMain',
+                        vibrancy: false,
+                        name: 'cloud',
+                        animation: 'fromBottom',
+                        vibrancyOptions:{
+                         padding: 5, // 默认模糊窗口的padding用来留窗口阴影
+                        }, // 选填
+                        }
+                    })
+                    win.show()
+                    remote.getCurrentWindow().close();
+                    }else{
+                     _this.$Message.error(res.data.message);
+                    }
+            })
+    //        let fatherBounds = this.$Win.win.getBounds()
+    //   // 判断右边是否过界
+    // //   let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x -300
+    // //   let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x - 1000
+    //   let x=(fatherBounds.x+fatherBounds.width/2-680)<0?0:(fatherBounds.x+fatherBounds.width/2-680);
+    //   let y = (fatherBounds.y+fatherBounds.height/2-480)<0?0:(fatherBounds.y+fatherBounds.height/2-480);
 
-      let win = this.$Win.createWin({
-        width: 1360,
-        height: 960,
-        x: x,
-        y: y,
-        windowConfig: {
-          router: '/mainWindow/MessageMain',
-          vibrancy: false,
-          name: 'cloud',
-          animation: 'fromBottom'
-        }
-      })
-      win.show()
-      remote.getCurrentWindow().close();
+    //   let win = this.$Win.createWin({
+    //     width: 1360,
+    //     height: 960,
+    //     x: x,
+    //     y: y,
+    //     windowConfig: {
+    //       router: '/mainWindow/MessageMain',
+    //       vibrancy: false,
+    //       name: 'cloud',
+    //       animation: 'fromBottom'
+    //     }
+    //   })
+    //   win.show()
+    //   remote.getCurrentWindow().close();
 
 
         },

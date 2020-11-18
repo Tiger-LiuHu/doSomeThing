@@ -34,7 +34,6 @@ export default {
     //   let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x-1000 
        let x=(fatherBounds.x+fatherBounds.width/2-150)<0?0:(fatherBounds.x+fatherBounds.width/2-150);
       let y = (fatherBounds.y+fatherBounds.height/2-250)<0?0:(fatherBounds.y+fatherBounds.height/2-250);
-
       let win = this.$Win.createWin({
         width: 300,
         height: 500,
@@ -44,7 +43,11 @@ export default {
           router: '/Login',
           vibrancy: false,
           name: 'Login',
-          animation: 'fromBottom'
+          animation: 'fromBottom',
+          vibrancyOptions:{
+            padding: 5, // 默认模糊窗口的padding用来留窗口阴影
+            // borderRadius: 5, // 模糊窗口的圆角度数
+            }, // 选填
         }
       })
       win.show()

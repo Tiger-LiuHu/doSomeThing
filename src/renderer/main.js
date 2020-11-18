@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import axios from 'axios'
-
+// import axios from 'axios'
+// import axios from './utils/axiosService'
 import App from './App'
 import router from './router'
 import store from './store'
@@ -13,8 +13,8 @@ import Win from 'electron-vue-windows'
 import './assets/transform/transform.css'
 //导入图标
 import "./assets/icon/iconfont.js"
-import db from '../renderer/Commom/datastore.js'
-Vue.prototype.$db = db;
+// import db from '../renderer/Commom/datastore.js'
+// Vue.prototype.$db = db;
 
 
 
@@ -28,7 +28,7 @@ Vue.prototype.$Win = Win
 Vue.use(ViewUI);
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.http = Vue.prototype.$http = axios
+    // Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

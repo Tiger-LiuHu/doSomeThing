@@ -10,9 +10,9 @@
                 </div>
             </div>
             <div style="display: flex;height:200px;align-items: center;justify-content: space-around;flex-direction: column;padding: 10px">
-              <Input v-model="input" placeholder="请输入用户名"/>
-              <Input v-model="input" placeholder="请输入密码！"/>
-              <Input v-model="input" placeholder="请确认密码！"/>
+              <Input v-model="name" placeholder="请输入用户名"/>
+              <Input v-model="pwd" type="password" placeholder="请输入密码！" />
+              <Input v-model="comfirmPwd" type="password" placeholder="请确认密码！"  />
               <div style="width: 100%;display: flex">
                 <Button style="width: 50%"@click="Register">注册</Button>
                 <Button style="width: 50%" @click="login">已有帐号去登录</Button>
@@ -40,10 +40,18 @@
 <script>
 import { remote } from 'electron';
 import MainHeader from '@/components/Common/MainHeader.vue';
+import {signByUsername,Register} from"@/api/user.js"
+
 export default {
   name: 'Login',
   components: { MainHeader },
-
+    data(){
+        return {
+            name:"",
+            pwd:"",
+            comfirmPwd:"",
+        }
+    },
   methods: {
     closeWindow () {
       remote.app.quit()
@@ -74,8 +82,35 @@ export default {
       this.$router.push('/')
     },
     Register(){
-        this.$store.dispatch('changeTransition', 'slipLeft')
-        this.$router.push('/login')   
+        let _this=this;
+           if(this.pwd!=this.comfirmPwd || (!!!this.pwd)) {
+
+               this.$Message.error("两次密码不同，请重新输入");
+                this.pwd="";
+                this.comfirmPwd="";
+           }else{
+            Register(_this.name,_this.pwd).then(res=>{
+                    console.log(res.data.message);
+                    if(res.data.Success){
+                          _this.$Message.success(res.data.message);
+                             _this.$store.dispatch('changeTransition', 'slipLeft')
+                             _this.$router.push('/login')
+                      }else{
+                           _this.pwd="";
+                          _this.comfirmPwd="";
+                          _this.$Message.error(res.data.message);
+                      }
+               }
+            )
+
+
+
+
+                 this.$store.dispatch('changeTransition', 'slipLeft')
+                   this.$router.push('/login')
+           }
+
+   
     },
     login () {
       this.$store.dispatch('changeTransition', 'slipLeft')

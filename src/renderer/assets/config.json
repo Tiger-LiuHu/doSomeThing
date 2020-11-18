@@ -1,0 +1,22 @@
+{
+    "baseurl": {
+        "desc": "说明：后端数据接口基地址",
+        "value": "http://192.168.3.222:3000"
+    },
+    "GatewayServer": {
+        "desc": "说明：token获取地址",
+        "value": "http://192.168.3.201:8095"
+    },
+    "FileAdress": {
+        "desc": "图片地址",
+        "value": "http://192.168.3.201:8096"
+    },
+    "GatewayWeb": {
+        "desc": "门户地址",
+        "value": "http://192.168.3.201:9696"
+    },
+    "SystemID": {
+        "desc": "系统Id",
+        "value": "5"
+    }
+}
